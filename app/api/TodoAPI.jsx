@@ -1,8 +1,8 @@
 module.exports = {
-    setTodos: function(todos){
+    setTodos: todos => {
         localStorage.setItem("todos", JSON.stringify(todos));
     },
-    getTodos: function(){
+    getTodos: () => {
         var allTodos = localStorage.getItem("todos");
         return JSON.parse(allTodos);
     }
