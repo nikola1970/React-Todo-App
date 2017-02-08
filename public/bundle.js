@@ -21645,7 +21645,7 @@
 	                React.createElement("span", { className: "isComplete glyphicon glyphicon-ok", onClick: this.markDone }),
 	                task.task,
 	                " ",
-	                React.createElement("span", { onClick: this.deleteTodo, className: "glyphicon glyphicon-remove" })
+	                React.createElement("span", { onClick: this.deleteTodo, className: "glyphicon glyphicon-trash" })
 	            )
 	        );
 	    }
@@ -30481,7 +30481,7 @@
 
 
 	// module
-	exports.push([module.id, "*, p, div, span, a, h1, h2, h3, h4, h5, h6, section, ul, li, header, footer, main, body {\n  margin: 0;\n  padding: 0; }\n\n*:hover, span {\n  transition: all 0.3s; }\n\nbody {\n  padding-top: 30px; }\n\nh1 {\n  margin-bottom: 20px; }\n\np {\n  font-size: 18px; }\n\nspan {\n  display: inline-block; }\n\n.todoItem {\n  text-align: left; }\n  .todoItem p {\n    border-bottom: 1px solid #e4e4e4;\n    padding: 10px; }\n  .todoItem span {\n    cursor: pointer;\n    float: right; }\n    .todoItem span:hover {\n      color: red; }\n  .todoItem .glyphicon-remove {\n    margin-top: 3px; }\n  .todoItem.done {\n    background-color: #ecf0f1; }\n    .todoItem.done p {\n      text-decoration: line-through; }\n    .todoItem.done .isComplete {\n      color: green; }\n  .todoItem .isComplete {\n    float: none;\n    margin-right: 20px; }\n    .todoItem .isComplete:hover {\n      color: green; }\n\n#app {\n  max-width: 500px;\n  margin: 0 auto; }\n\n.todoApp {\n  text-align: center; }\n\n.btn {\n  width: 100%;\n  margin-top: 5px; }\n\n.todoList {\n  margin-top: 30px; }\n", ""]);
+	exports.push([module.id, "*, p, div, span, a, h1, h2, h3, h4, h5, h6, section, ul, li, header, footer, main, body {\n  margin: 0;\n  padding: 0; }\n\n*:hover, span {\n  transition: all 0.3s; }\n\nbody {\n  padding-top: 30px; }\n\nh1 {\n  margin-bottom: 20px; }\n\np {\n  font-size: 18px; }\n\nspan {\n  display: inline-block; }\n\n.todoItem {\n  text-align: left; }\n  .todoItem p {\n    border-bottom: 1px solid #e4e4e4;\n    padding: 10px; }\n  .todoItem span {\n    cursor: pointer;\n    float: right; }\n    .todoItem span:hover {\n      color: red; }\n  .todoItem .glyphicon-trash {\n    margin-top: 3px; }\n  .todoItem.done {\n    background-color: #ecf0f1; }\n    .todoItem.done p {\n      text-decoration: line-through; }\n    .todoItem.done .isComplete {\n      color: green; }\n  .todoItem .isComplete {\n    float: none;\n    margin-right: 20px; }\n    .todoItem .isComplete:hover {\n      color: green; }\n\n#app {\n  max-width: 500px;\n  margin: 0 auto; }\n\n.todoApp {\n  text-align: center; }\n\n.btn {\n  width: 100%;\n  margin-top: 5px; }\n\n.todoList {\n  margin-top: 30px; }\n", ""]);
 
 	// exports
 

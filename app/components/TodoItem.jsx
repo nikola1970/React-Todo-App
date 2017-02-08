@@ -11,7 +11,7 @@ var TodoItem = React.createClass({
         var {task} = this.props;
         return (
             <div className={"todoItem " + (task.isComplete ? "done" : "")}>
-                <p><span className="isComplete glyphicon glyphicon-ok" onClick={this.markDone}></span>{task.task} <span onClick={this.deleteTodo} className="glyphicon glyphicon-remove"></span></p>
+                <p><span className="isComplete glyphicon glyphicon-ok" onClick={this.markDone}></span>{task.task} <span onClick={this.deleteTodo} className="glyphicon glyphicon-trash"></span></p>
             </div>
         );
     }
