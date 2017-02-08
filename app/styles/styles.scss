@@ -1,0 +1,83 @@
+*, p, div, span, a, h1, h2, h3, h4, h5, h6, section, ul, li, header, footer, main, body {
+    margin: 0;
+    padding: 0;
+}
+
+*:hover, span {
+    transition: all 0.3s;
+}
+
+body {
+    padding-top: 30px;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 18px;
+}
+
+span {
+    display: inline-block;
+}
+
+.todoItem {
+
+    text-align: left;
+
+    p {
+        border-bottom: 1px solid #e4e4e4;
+        padding: 10px;
+    }
+    span {
+        cursor: pointer;
+        float: right;
+        &:hover {
+            color: red;
+        }
+    }
+
+    .glyphicon-remove {
+        margin-top: 3px;
+    }
+
+    &.done {
+        background-color: #ecf0f1;
+        p {
+            text-decoration: line-through;
+        }
+
+        .isComplete {
+            color: green;
+        }
+    }
+
+    .isComplete {
+        float: none;
+        margin-right: 20px;
+        &:hover {
+            color: green;
+        }
+    }
+}
+
+#app {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.todoApp {
+    text-align: center;
+}
+
+.btn {
+    width: 100%;
+    margin-top: 5px;
+}
+
+.todoList {
+    margin-top: 30px;
+}
+
