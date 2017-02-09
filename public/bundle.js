@@ -21502,8 +21502,8 @@
 	var TodoList = __webpack_require__(179);
 	var AddTodo = __webpack_require__(181);
 	var uuid = __webpack_require__(182);
-
 	var TodoAPI = __webpack_require__(241);
+	var SearchForm = __webpack_require__(253);
 
 	var TodoApp = React.createClass({
 	    displayName: "TodoApp",
@@ -21511,12 +21511,17 @@
 
 	    getInitialState: function getInitialState() {
 	        return {
-	            todos: TodoAPI.getTodos() || []
+	            todos: TodoAPI.getTodos() || [],
+	            isChanging: true,
+	            searchText: null
 	        };
 	    },
 
 	    componentDidUpdate: function componentDidUpdate() {
-	        TodoAPI.setTodos(this.state.todos);
+	        if (this.state.isChanging) {
+	            // if we are adding, deleting or marking our TODO item we will modify our DB (localStorage in this case)
+	            TodoAPI.setTodos(this.state.todos);
+	        }
 	    },
 
 	    handleAddTodo: function handleAddTodo(newTask) {
@@ -21525,6 +21530,7 @@
 	            task: newTask
 	        };
 	        this.setState({
+	            isChanging: true,
 	            todos: [].concat(_toConsumableArray(this.state.todos), [taskToAdd])
 	        });
 	    },
@@ -21536,6 +21542,7 @@
 	            return todo.id !== id;
 	        });
 	        this.setState({
+	            isChanging: true,
 	            todos: updatedTodos
 	        });
 	    },
@@ -21547,13 +21554,31 @@
 	            return todo.id == id ? (todo.task.isComplete = !todo.task.isComplete, todo) : todo;
 	        });
 	        this.setState({
+	            isChanging: true,
 	            todos: updatedTodos
 	        });
 	    },
 
-	    render: function render() {
-	        var todos = this.state.todos;
+	    handleFilterItems: function handleFilterItems(searchText) {
+	        var regex = new RegExp("^" + searchText, "i");
+	        this.setState({
+	            isChanging: false, // here we are switching to false as we are not gonna modify our database
+	            searchText: regex
+	        });
+	    },
 
+	    render: function render() {
+	        var _state = this.state,
+	            todos = _state.todos,
+	            isChanging = _state.isChanging,
+	            searchText = _state.searchText;
+
+	        if (!isChanging) {
+	            // if we are typing in the search field (then we switch 'isChanging' to false) we are filtering actual todo list
+	            todos = todos.filter(function (todo) {
+	                return searchText.test(todo.task.task);
+	            });
+	        } // else grabbing actual todo list from out state
 	        return React.createElement(
 	            "div",
 	            { className: "todoApp" },
@@ -21562,8 +21587,9 @@
 	                null,
 	                "Todo List:"
 	            ),
-	            React.createElement(AddTodo, { addTodo: this.handleAddTodo }),
-	            React.createElement(TodoList, { todos: todos, deleteTodo: this.handleDeleteTodo, markDone: this.handleMarkDone })
+	            React.createElement(SearchForm, { filterItems: this.handleFilterItems }),
+	            React.createElement(TodoList, { todos: todos, deleteTodo: this.handleDeleteTodo, markDone: this.handleMarkDone }),
+	            React.createElement(AddTodo, { addTodo: this.handleAddTodo })
 	        );
 	    }
 
@@ -30481,10 +30507,38 @@
 
 
 	// module
-	exports.push([module.id, "*, p, div, span, a, h1, h2, h3, h4, h5, h6, section, ul, li, header, footer, main, body {\n  margin: 0;\n  padding: 0; }\n\n*:hover, span {\n  transition: all 0.3s; }\n\nbody {\n  padding-top: 30px; }\n\nh1 {\n  margin-bottom: 20px; }\n\np {\n  font-size: 18px; }\n\nspan {\n  display: inline-block; }\n\n.todoItem {\n  text-align: left; }\n  .todoItem p {\n    border-bottom: 1px solid #e4e4e4;\n    padding: 10px; }\n  .todoItem span {\n    cursor: pointer;\n    float: right; }\n    .todoItem span:hover {\n      color: red; }\n  .todoItem .glyphicon-trash {\n    margin-top: 3px; }\n  .todoItem.done {\n    background-color: #ecf0f1; }\n    .todoItem.done p {\n      text-decoration: line-through; }\n    .todoItem.done .isComplete {\n      color: green; }\n  .todoItem .isComplete {\n    float: none;\n    margin-right: 20px; }\n    .todoItem .isComplete:hover {\n      color: green; }\n\n#app {\n  max-width: 500px;\n  margin: 0 auto; }\n\n.todoApp {\n  text-align: center; }\n\n.btn {\n  width: 100%;\n  margin-top: 5px; }\n\n.todoList {\n  margin-top: 30px; }\n", ""]);
+	exports.push([module.id, "*, p, div, span, a, h1, h2, h3, h4, h5, h6, section, ul, li, header, footer, main, body {\n  margin: 0;\n  padding: 0; }\n\n*:hover, span {\n  transition: all 0.3s; }\n\nbody {\n  padding-top: 30px; }\n\nh1 {\n  margin-bottom: 20px; }\n\np {\n  font-size: 18px; }\n\nspan {\n  display: inline-block; }\n\n.todoItem {\n  text-align: left; }\n  .todoItem p {\n    border-bottom: 1px solid #e4e4e4;\n    padding: 10px; }\n  .todoItem span {\n    cursor: pointer;\n    float: right; }\n    .todoItem span:hover {\n      color: red; }\n  .todoItem .glyphicon-trash {\n    margin-top: 3px; }\n  .todoItem.done {\n    background-color: #ecf0f1; }\n    .todoItem.done p {\n      text-decoration: line-through; }\n    .todoItem.done .isComplete {\n      color: green; }\n  .todoItem .isComplete {\n    float: none;\n    margin-right: 20px; }\n    .todoItem .isComplete:hover {\n      color: green; }\n\n#app {\n  max-width: 500px;\n  margin: 0 auto; }\n\n.todoApp {\n  text-align: center; }\n\n.btn {\n  width: 100%;\n  margin-top: 5px; }\n\n.todoList {\n  margin: 30px 0;\n  border: 1px solid #e4e4e4;\n  border-bottom: none; }\n", ""]);
 
 	// exports
 
+
+/***/ },
+/* 253 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var React = __webpack_require__(1);
+
+	var SearchForm = React.createClass({
+	    displayName: "SearchForm",
+
+
+	    filterItems: function filterItems() {
+	        return this.props.filterItems(this.refs.search.value);
+	    },
+
+	    render: function render() {
+	        return React.createElement(
+	            "div",
+	            { className: "searchForm" },
+	            React.createElement("input", { type: "text", ref: "search", onChange: this.filterItems, className: "form-control", placeholder: "Search for a task" })
+	        );
+	    }
+
+	});
+
+	module.exports = SearchForm;
 
 /***/ }
 /******/ ]);
