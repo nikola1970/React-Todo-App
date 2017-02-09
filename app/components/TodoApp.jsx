@@ -53,7 +53,7 @@ var TodoApp = React.createClass({
         var {todos, isChanging, searchText} = this.state;
         if (!isChanging) { // if we are typing in the search field (then we switch 'isChanging' to false) we are filtering actual todo list
             todos = todos.filter(todo => searchText.test(todo.task.task));
-        } // else grabbing actual todo list from out state
+        } // else grabbing actual todo list from our state
         return (
             <div className="todoApp">
                 <h1>Todo List:</h1> 
@@ -61,7 +61,7 @@ var TodoApp = React.createClass({
                 <TodoList todos={todos} deleteTodo={this.handleDeleteTodo} markDone={this.handleMarkDone}/>
                 <AddTodo addTodo={this.handleAddTodo}/>
             </div>
-        )
+        );
     }
 
 });

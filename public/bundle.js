@@ -21566,7 +21566,7 @@
 	            todos = todos.filter(function (todo) {
 	                return searchText.test(todo.task.task);
 	            });
-	        } // else grabbing actual todo list from out state
+	        } // else grabbing actual todo list from our state
 	        return React.createElement(
 	            "div",
 	            { className: "todoApp" },
