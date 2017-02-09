@@ -21529,10 +21529,7 @@
 	            id: uuid.v1(),
 	            task: newTask
 	        };
-	        this.setState({
-	            isChanging: true,
-	            todos: [].concat(_toConsumableArray(this.state.todos), [taskToAdd])
-	        });
+	        this.setState(Object.assign({}, this.state, { isChanging: true, todos: [].concat(_toConsumableArray(this.state.todos), [taskToAdd]) }));
 	    },
 
 	    handleDeleteTodo: function handleDeleteTodo(id) {
@@ -21541,10 +21538,7 @@
 	        var updatedTodos = todos.filter(function (todo) {
 	            return todo.id !== id;
 	        });
-	        this.setState({
-	            isChanging: true,
-	            todos: updatedTodos
-	        });
+	        this.setState(Object.assign({}, this.state, { isChanging: true, todos: updatedTodos }));
 	    },
 
 	    handleMarkDone: function handleMarkDone(id) {
@@ -21553,18 +21547,12 @@
 	        var updatedTodos = todos.map(function (todo) {
 	            return todo.id == id ? (todo.task.isComplete = !todo.task.isComplete, todo) : todo;
 	        });
-	        this.setState({
-	            isChanging: true,
-	            todos: updatedTodos
-	        });
+	        this.setState(Object.assign({}, this.state, { isChanging: true, todos: updatedTodos }));
 	    },
 
 	    handleFilterItems: function handleFilterItems(searchText) {
 	        var regex = new RegExp("^" + searchText, "i");
-	        this.setState({
-	            isChanging: false, // here we are switching to false as we are not gonna modify our database
-	            searchText: regex
-	        });
+	        this.setState(Object.assign({}, this.state, { isChanging: false, searchText: regex }));
 	    },
 
 	    render: function render() {
